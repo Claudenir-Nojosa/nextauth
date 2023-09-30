@@ -59,7 +59,6 @@ export const authOptions = {
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NODE_ENV === "development",
 };
 
 const handler = NextAuth(authOptions);

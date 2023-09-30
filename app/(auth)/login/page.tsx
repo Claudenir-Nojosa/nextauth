@@ -1,16 +1,24 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
 
 const Login = () => {
+  const session = useSession();
   const { toast } = useToast();
   const router = useRouter();
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+  useEffect(() => {
+    if (session.status === 'authenticated') {
+      router.push('/dashboard')
+    }
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -99,6 +107,8 @@ const Login = () => {
           Login
         </button>
       </form>
+      <Button onClick={() => signIn("github")}>Github</Button>
+      <Button onClick={() => signIn("google")}>Google</Button>
     </section>
   );
 };
