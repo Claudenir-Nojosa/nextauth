@@ -1,11 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios"; // Import Axios
+import axios from "axios"; 
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
-import { db } from "@/lib/prismadb";
 
-const Register = () => {
+const RegisterForm = () => {
   const { toast } = useToast();
   const router = useRouter();
   const [data, setData] = useState({
@@ -14,7 +13,7 @@ const Register = () => {
     password: "",
   });
 
-  const registerUser = async (e) => {
+  const registerUser = async (e: React.FormEvent) => {
     e.preventDefault();
 
     console.log("User:", {
@@ -23,14 +22,6 @@ const Register = () => {
       password: data.password,
     });
     try {
-      const exist = await db.user.findUnique({
-        where: {
-          email,
-        },
-      });
-      if (exist) {
-        throw new Error("Usuário já cadastrado.");
-      }
       const response = await axios.post(
         "/api/register",
         {
@@ -121,4 +112,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterForm;

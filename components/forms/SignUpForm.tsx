@@ -6,7 +6,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 
-const Login = () => {
+const LoginForm = () => {
   const session = useSession();
   const { toast } = useToast();
   const router = useRouter();
@@ -15,12 +15,12 @@ const Login = () => {
     password: "",
   });
   useEffect(() => {
-    if (session.status === 'authenticated') {
-      router.push('/dashboard')
+    if (session.status === "authenticated") {
+      router.push("/dashboard");
     }
-  })
+  });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const { email, password } = data;
@@ -50,7 +50,7 @@ const Login = () => {
 
       if (res?.error == null) {
         toast({
-          description: "Usuário criado.",
+          description: "Usuário logado.",
         });
         router.push("/");
       } else {
@@ -113,4 +113,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;
