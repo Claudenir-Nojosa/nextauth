@@ -14,15 +14,18 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (session.status === "unauthenticated") {
-      router.push("/");
+      router.push("/login");
     }
   });
 
   const { data: dataSession } = useSession();
   return (
     <>
-      <div>{dataSession?.user?.email}</div>;
-      <Button onClick={handleSignOut}>Sign out</Button>
+      <div className="text-2xl font-bold text-center">
+        Seja bem vindo
+        <pre className="text-red-800">{dataSession?.user?.name}</pre>
+      </div>
+      <Button onClick={handleSignOut}>Sair</Button>
     </>
   );
 };
