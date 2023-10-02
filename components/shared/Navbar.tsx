@@ -15,6 +15,8 @@ import {
   Fingerprint,
   GithubIcon,
   LogInIcon,
+  LogOut,
+  User2,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -64,12 +66,12 @@ export const Navbar = () => {
             <GithubIcon className="text-default-500" />
           </Link>
           {dataSession?.user ? (
-            <Button variant="ghost" size="icon" onClick={handleSignOut}>
-              <DoorOpen />
+            <Button className="text-default-500" variant="ghost" size="icon" onClick={handleSignOut}>
+              <LogOut />
             </Button>
           ) : (
             <Link href="/login">
-              <LogInIcon className="text-default-500" />
+              <User2 className="text-default-500" />
             </Link>
           )}
         </NavbarItem>
@@ -80,12 +82,12 @@ export const Navbar = () => {
             <GithubIcon className="hidden sm:flex text-default-500 " />
           </Link>
           {dataSession?.user ? (
-            <Button variant="ghost" size="icon" onClick={handleSignOut}>
-              <DoorOpen /> 
+            <Button className="text-default-500" variant="ghost" size="icon" onClick={handleSignOut}>
+              <LogOut />
             </Button>
           ) : (
             <Link href="/login">
-              <LogInIcon className="text-default-500" />
+              <User2 className="text-default-500" />
             </Link>
           )}
         </NavbarItem>

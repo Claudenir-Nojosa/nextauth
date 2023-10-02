@@ -21,11 +21,11 @@ const Dashboard = () => {
   const { data: dataSession } = useSession();
   return (
     <>
-      <div className="text-2xl font-bold text-center">
+      <div className="text-4xl font-bold text-center">
         Seja bem vindo
-        <pre className="text-red-800">{dataSession?.user?.name}</pre>
+        <pre className="text-slate-300">{dataSession?.user?.name}</pre>
       </div>
-      <Button onClick={handleSignOut}>Sair</Button>
+      <Button variant="ghost" onClick={handleSignOut}>Sair</Button>
     </>
   );
 };
