@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/api/auth/[...nextauth]/route.js",
-    "components/providers/providers.js",
+    "components/providers/providers.tsx",
     "app/page.jsx",
     "components/shared/Navbar.tsx",
     "app/(root)/register/page.tsx"
