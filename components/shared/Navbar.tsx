@@ -10,17 +10,11 @@ import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
 import { siteConfig } from "@/config/site";
-import {
-  DoorOpen,
-  Fingerprint,
-  GithubIcon,
-  LogInIcon,
-  LogOut,
-  User2,
-} from "lucide-react";
+import { DoorOpen, Fingerprint, LogInIcon, LogOut, User2 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import { GithubIcon } from "@/config/icons";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -63,15 +57,20 @@ export const Navbar = () => {
       <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full justify-end">
         <NavbarItem className="hidden sm:flex gap-2">
           <Link isExternal href={siteConfig.links.github} aria-label="Github">
-            <GithubIcon className="text-default-500" />
+            <GithubIcon className="text-default-500 hover:text-slate-200" />
           </Link>
           {dataSession?.user ? (
-            <Button className="text-default-500" variant="ghost" size="icon" onClick={handleSignOut}>
-              <LogOut />
+            <Button
+              className="text-default-500"
+              variant="ghost"
+              size="icon"
+              onClick={handleSignOut}
+            >
+              <LogOut className="hover:text-slate-200" />
             </Button>
           ) : (
             <Link href="/login">
-              <User2 className="text-default-500" />
+              <User2 className="text-default-500 hover:text-slate-200" />
             </Link>
           )}
         </NavbarItem>
@@ -79,15 +78,20 @@ export const Navbar = () => {
       <NavbarContent className=" sm:hidden basis-1/5 sm:basis-full justify-end">
         <NavbarItem className=" gap-2">
           <Link isExternal href={siteConfig.links.github} aria-label="Github">
-            <GithubIcon className="hidden sm:flex text-default-500 " />
+            <GithubIcon className="hidden sm:flex text-default-500 hover:text-slate-200 " />
           </Link>
           {dataSession?.user ? (
-            <Button className="text-default-500" variant="ghost" size="icon" onClick={handleSignOut}>
-              <LogOut />
+            <Button
+              className="text-default-500"
+              variant="ghost"
+              size="icon"
+              onClick={handleSignOut}
+            >
+              <LogOut className="hover:text-slate-200" />
             </Button>
           ) : (
             <Link href="/login">
-              <User2 className="text-default-500" />
+              <User2 className="text-default-500 hover:text-slate-200" />
             </Link>
           )}
         </NavbarItem>
