@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import Link from "next/link";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -10,7 +11,10 @@ export default async function Home() {
       {session ? (
         <pre>{JSON.stringify(session)}</pre>
       ) : (
-        <p>Faça login para visualizar os dados da conta.</p>
+        <p>
+          <Link className="underline text-slate-400" href="/login">Faça login</Link> para visualizar os dados da
+          conta.
+        </p>
       )}
     </>
   );

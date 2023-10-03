@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
@@ -17,20 +18,34 @@ const Dashboard = () => {
   return (
     <>
       {session.status === "unauthenticated" ? (
-        <div>Por favor, faça login para visualizar o dashboard.</div>
+        <div>
+          Por favor,
+          <Link className="underline text-slate-400 px-1" href="/login">
+            faça login
+          </Link>
+          para visualizar o dashboard.
+        </div>
       ) : (
         <div>
           <div className="text-4xl font-bold text-center justify-center flex flex-col items-center">
             Seja bem vindo
             <pre className="text-slate-300 my-4">{dataSession?.user?.name}</pre>
-            <Image
-              className="rounded-full"
-              src={dataSession?.user?.image || ""}
-              height={100}
-              width={100}
-              alt={`${dataSession?.user?.name} profile pic`}
-            />
-            <Button className="mt-10 hover:bg-slate-800" variant="outline" onClick={handleSignOut}>
+            {dataSession?.user?.image === null ? (
+              ""
+            ) : (
+              <Image
+                className="rounded-full"
+                src={dataSession?.user?.image || ""}
+                height={100}
+                width={100}
+                alt={`${dataSession?.user?.name} profile pic`}
+              />
+            )}
+            <Button
+              className="mt-10 hover:bg-slate-800"
+              variant="outline"
+              onClick={handleSignOut}
+            >
               Sair
             </Button>
           </div>

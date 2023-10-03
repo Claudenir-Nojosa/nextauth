@@ -14,17 +14,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
-import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { LoginSchema } from "@/lib/validations/user";
 import { Card, CardBody, CardFooter } from "@nextui-org/react";
-import { Github } from "lucide-react";
 import { GithubIcon, GoogleIcon } from "@/config/icons";
-import Image from "next/image";
+import toast from "react-hot-toast";
+
 const LoginForm = () => {
   const session = useSession();
-  const { toast } = useToast();
   const router = useRouter();
 
   useEffect(() => {
@@ -50,14 +48,13 @@ const LoginForm = () => {
       });
 
       if (res?.error == null) {
-        toast({
-          description: "Usuário logado.",
+        toast.success("Usuário logado.", {
+          position: "bottom-right",
         });
         router.push("/");
       } else {
-        toast({
-          description: "Aconteceu um erro ao fazer login",
-          className: "error-toast",
+        toast.error("Aconteceu um erro ao fazer login", {
+          position: "bottom-right",
         });
       }
     } catch (error) {
@@ -101,7 +98,11 @@ const LoginForm = () => {
                 )}
               />
               <div className="flex justify-center items-center">
-                <Button className="hover:bg-slate-800" variant="outline" type="submit">
+                <Button
+                  className="hover:bg-slate-800"
+                  variant="outline"
+                  type="submit"
+                >
                   Login
                 </Button>
               </div>
