@@ -1,9 +1,14 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { AuthProvider, ThemeProviders } from "@/components/providers/providers";
+import {
+  AuthProvider,
+  QueryProvider,
+  ThemeProviders,
+} from "@/components/providers/providers";
 import { Navbar } from "@/components/shared/Navbar";
 import { Toaster } from "react-hot-toast";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,17 +23,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Toaster />
-      <body className={inter.className}>
-        <ThemeProviders>
-          <AuthProvider>
-            <Navbar />
-            <main className=" h-screen flex flex-col justify-center items-center">
-              {children}
-            </main>
-          </AuthProvider>
-        </ThemeProviders>
-      </body>
+      <QueryProvider>
+        <Toaster />
+        <body className={inter.className}>
+          <ThemeProviders>
+            <AuthProvider>
+              <Navbar />
+              <main className=" h-screen flex flex-col justify-center items-center">
+                {children}
+              </main>
+            </AuthProvider>
+          </ThemeProviders>
+        </body>
+      </QueryProvider>
     </html>
   );
 }
