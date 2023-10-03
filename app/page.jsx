@@ -6,8 +6,12 @@ export default async function Home() {
   return (
     <>
       <h1 className="text-4xl">Home</h1>
-      <p>Rendered by the Server</p>
-      <pre>{JSON.stringify(session)}</pre>
+      <h2 className="text-2xl">Rendered by the Server</h2>
+      {session ? (
+        <pre>{JSON.stringify(session)}</pre>
+      ) : (
+        <p>Faça login para visualizar os dados da conta.</p>
+      )}
     </>
   );
 }
