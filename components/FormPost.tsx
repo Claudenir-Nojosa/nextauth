@@ -44,7 +44,7 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-1/3 space-y-6 bg-slate-900  rounded-xl mx-10 p-4 border-slate-200 border"
+        className="min-w-1/3 max-w-3xl space-y-6 bg-slate-900  rounded-xl mx-10 p-4 mt-6 border-slate-200 border min-w-[10rem]"
       >
         <FormField
           control={form.control}

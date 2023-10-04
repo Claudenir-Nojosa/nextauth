@@ -24,14 +24,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <QueryProvider>
-        <Toaster richColors/>
+        <Toaster richColors />
         <body className={inter.className}>
           <ThemeProviders>
             <AuthProvider>
-              <Navbar />
-              <main className=" h-screen flex flex-col justify-center items-center">
-                {children}
-              </main>
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-1 mt-7 flex flex-col items-center justify-center">{children}</main>
+              </div>
             </AuthProvider>
           </ThemeProviders>
         </body>

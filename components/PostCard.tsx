@@ -8,11 +8,12 @@ import {
 } from "@/components/ui/card";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { title } from "./shared/primitives";
 const PostCard = () => {
   return (
-    <Card>
+    <Card className="max-w-sm flex flex-col items-center justify-center">
       <CardHeader>
-        <CardTitle>Card Title</CardTitle>
+        <CardTitle className={title({ color: "cyan", size: "sm" })}>Card Title</CardTitle>
         <CardDescription>Card Description</CardDescription>
       </CardHeader>
       <CardContent>

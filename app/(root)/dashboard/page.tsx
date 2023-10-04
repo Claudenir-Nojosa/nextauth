@@ -1,4 +1,5 @@
 "use client";
+import { title } from "@/components/shared/primitives";
 import { Button } from "@/components/ui/button";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
@@ -27,9 +28,11 @@ const Dashboard = () => {
         </div>
       ) : (
         <div>
-          <div className="text-4xl font-bold text-center justify-center flex flex-col items-center">
-            Seja bem vindo
-            <pre className="text-slate-300 my-4">{dataSession?.user?.name}</pre>
+          <div className="text-4xl font-bold text-center justify-center flex flex-col items-center gap-3">
+            <p className={title({ color: "cyan", size: "lg" })}>
+              Seja bem vindo!
+            </p>
+            <pre>{dataSession?.user?.name}</pre>
             {dataSession?.user?.image === null ? (
               ""
             ) : (
