@@ -12,5 +12,5 @@ export const FormSchema = z.object({
   title: z
     .string({ required_error: "Insira o título" })
     .min(2, { message: "Favor preencher o título." }),
-  tag: z.string({ required_error: "Selecione uma tag" }),
+  tag: z.string({ required_error: "Selecione uma opção." }),
 });

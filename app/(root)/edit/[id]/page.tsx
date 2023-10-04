@@ -1,9 +1,7 @@
-import React from 'react'
+import { FormPost } from "@/components/FormPost";
 
 const EditPostPage = () => {
-  return (
-    <div>EditPostPage</div>
-  )
-}
+  return <FormPost isEditing={true} />;
+};
 
-export default EditPostPage
+export default EditPostPage;

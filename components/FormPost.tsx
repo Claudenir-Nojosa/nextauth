@@ -24,8 +24,14 @@ import {
   SelectValue,
 } from "./ui/select";
 import { FormSchema } from "@/lib/validations/post";
+import { FC } from "react";
+import Link from "next/link";
 
-export const FormPost = () => {
+interface FormPostProps {
+  isEditing: boolean;
+}
+
+export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
@@ -38,7 +44,7 @@ export const FormPost = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-2/3 space-y-6 bg-slate-900  rounded-xl mx-10 p-4 border-slate-200 border"
+        className="w-1/3 space-y-6 bg-slate-900  rounded-xl mx-10 p-4 border-slate-200 border"
       >
         <FormField
           control={form.control}
@@ -81,7 +87,7 @@ export const FormPost = () => {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Selecione " />
                   </SelectTrigger>
                   <SelectContent className="bg-black">
@@ -95,9 +101,12 @@ export const FormPost = () => {
             </FormItem>
           )}
         />
-        <div className="flex justify-center">
+        <div className="flex justify-end gap-2">
           <Button variant="outline" type="submit">
-            Criar
+            <Link href="/">Cancelar</Link>
+          </Button>
+          <Button variant="outline" type="submit">
+            {isEditing ? "Atualizar" : "Criar"}
           </Button>
         </div>
       </form>
