@@ -10,6 +10,10 @@ export const siteConfig = {
       label: "Dashboard",
       href: "/dashboard",
     },
+    {
+      label: "Criar Post",
+      href: "/create",
+    },
   ],
   navMenuItems: [
     {
@@ -19,6 +23,10 @@ export const siteConfig = {
     {
       label: "Dashboard",
       href: "/dashboard",
+    },
+    {
+      label: "Criar Post",
+      href: "/create",
     },
   ],
   links: {
