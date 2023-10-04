@@ -15,6 +15,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { GithubIcon } from "@/config/icons";
+import Image from "next/image";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -33,7 +34,12 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full " justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Fingerprint />
+            <Image
+              src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/3907424.png?raw=true"
+              width={54}
+              height={54}
+              alt="Logo"
+            />
           </NextLink>
         </NavbarBrand>
         <ul className="hidden sm:flex gap-4  lg:pl-0 justify-start ml-2">

@@ -15,7 +15,8 @@ const nextConfig = {
         pathname: "/a/**",
       },
     ],
+    domains: ["github.com"],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
