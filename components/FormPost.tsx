@@ -23,21 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-
-const FormSchema = z.object({
-  content: z
-    .string({ required_error: "Insira o conteúdo" })
-    .min(10, {
-      message: "Conteúdo tem que ter no mínimo 10 caracteres.",
-    })
-    .max(160, {
-      message: "Conteúdo tem que ter no máximo 160 caracteres.",
-    }),
-  title: z
-    .string({ required_error: "Insira o título" })
-    .min(2, { message: "Favor preencher o título." }),
-  tag: z.string({ required_error: "Selecione uma tag" }),
-});
+import { FormSchema } from "@/lib/validations/post";
 
 export const FormPost = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -52,7 +38,7 @@ export const FormPost = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-2/3 space-y-6 bg-slate-600 rounded-xl mx-10 p-4"
+        className="w-2/3 space-y-6 bg-slate-900  rounded-xl mx-10 p-4 border-slate-200 border"
       >
         <FormField
           control={form.control}
@@ -89,14 +75,14 @@ export const FormPost = () => {
           name="tag"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Tag</FormLabel>
+              <FormLabel>Ferramenta</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Selecione um" />
+                    <SelectValue placeholder="Selecione " />
                   </SelectTrigger>
                   <SelectContent className="bg-black">
                     <SelectItem value="Nextjs">Nextjs</SelectItem>
@@ -111,7 +97,7 @@ export const FormPost = () => {
         />
         <div className="flex justify-center">
           <Button variant="outline" type="submit">
-            Submit
+            Criar
           </Button>
         </div>
       </form>
