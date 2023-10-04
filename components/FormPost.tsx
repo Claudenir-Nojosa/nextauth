@@ -26,6 +26,9 @@ import {
 import { FormSchema } from "@/lib/validations/post";
 import { FC } from "react";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { Tag } from "@prisma/client";
 
 interface FormPostProps {
   isEditing: boolean;
@@ -35,6 +38,16 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+
+  // fetch list tags
+  const { data: dataTags, isLoading: isLoadingTags } = useQuery<Tag[]>({
+    queryKey: ["tags"],
+    queryFn: async () => {
+      const response = await axios.get("/api/tags");
+      return response.data;
+    },
+  });
+  console.log(dataTags);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
@@ -91,9 +104,11 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
                     <SelectValue placeholder="Selecione " />
                   </SelectTrigger>
                   <SelectContent className="bg-black">
-                    <SelectItem value="Nextjs">Nextjs</SelectItem>
-                    <SelectItem value="React">React</SelectItem>
-                    <SelectItem value="Prisma">Prisma</SelectItem>
+                    {dataTags?.map((item) => (
+                      <SelectItem key={item.id} value={item.id}>
+                        {item.name}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </FormControl>
