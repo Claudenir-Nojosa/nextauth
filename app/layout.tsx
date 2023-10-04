@@ -7,7 +7,7 @@ import {
   ThemeProviders,
 } from "@/components/providers/providers";
 import { Navbar } from "@/components/shared/Navbar";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <QueryProvider>
-        <Toaster />
+        <Toaster richColors/>
         <body className={inter.className}>
           <ThemeProviders>
             <AuthProvider>

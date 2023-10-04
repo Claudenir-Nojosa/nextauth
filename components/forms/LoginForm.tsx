@@ -19,7 +19,7 @@ import { useEffect } from "react";
 import { LoginSchema } from "@/lib/validations/user";
 import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import { GithubIcon, GoogleIcon } from "@/config/icons";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 const LoginForm = () => {
   const session = useSession();
@@ -37,6 +37,13 @@ const LoginForm = () => {
       password: "",
     },
   });
+
+  const googleSignInHandler = async () => {
+    await signIn("google");
+  };
+  const githubSignInHandler = async () => {
+    await signIn("github");
+  };
 
   const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
     console.log(values);
@@ -117,7 +124,7 @@ const LoginForm = () => {
                 <Button
                   className="hover:bg-slate-800"
                   variant="outline"
-                  onClick={() => signIn("github")}
+                  onClick={githubSignInHandler}
                 >
                   <GithubIcon className="mr-2 h-4 w-4" />
                   Login com Github
@@ -125,7 +132,7 @@ const LoginForm = () => {
                 <Button
                   className="hover:bg-slate-800"
                   variant="outline"
-                  onClick={() => signIn("google")}
+                  onClick={googleSignInHandler}
                 >
                   <GoogleIcon className="mr-2 h-4 w-4" />
                   Login com Google
