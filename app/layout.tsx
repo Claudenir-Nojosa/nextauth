@@ -1,6 +1,5 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import {
   AuthProvider,
   QueryProvider,
@@ -8,8 +7,7 @@ import {
 } from "@/components/providers/providers";
 import { Navbar } from "@/components/shared/Navbar";
 import { Toaster } from "sonner";
-
-const inter = Inter({ subsets: ["latin"] });
+import { fontSans } from "@/config/fonts";
 
 export const metadata: Metadata = {
   title: "Boilerplate",
@@ -30,12 +28,14 @@ export default function RootLayout({
     <html lang="en">
       <QueryProvider>
         <Toaster richColors />
-        <body className={inter.className}>
+        <body className={fontSans.variable}>
           <ThemeProviders>
             <AuthProvider>
               <div className="flex flex-col min-h-screen">
                 <Navbar />
-                <main className="flex-1 mt-7 flex flex-col items-center justify-center">{children}</main>
+                <main className="flex-1 mt-7 flex flex-col items-center justify-center">
+                  {children}
+                </main>
               </div>
             </AuthProvider>
           </ThemeProviders>

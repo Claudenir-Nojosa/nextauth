@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
+import { Skeleton } from "@nextui-org/react";
 import { Input } from "./ui/input";
 import {
   Select,
@@ -89,33 +88,38 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="tag"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Ferramenta</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione " />
-                  </SelectTrigger>
-                  <SelectContent className="bg-black">
-                    {dataTags?.map((item) => (
-                      <SelectItem key={item.id} value={item.id}>
-                        {item.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {isLoadingTags ? (
+          <div>Carregando...</div>
+        ) : (
+          <FormField
+            control={form.control}
+            name="tag"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Ferramenta</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Selecione " />
+                    </SelectTrigger>
+
+                    <SelectContent className="bg-black">
+                      {dataTags?.map((item) => (
+                        <SelectItem key={item.id} value={item.id}>
+                          {item.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
         <div className="flex justify-end gap-2">
           <Button variant="outline" type="submit">
             <Link href="/">Cancelar</Link>

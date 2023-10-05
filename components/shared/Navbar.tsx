@@ -36,8 +36,8 @@ export const Navbar = () => {
           <NextLink className="flex justify-start items-center gap-1" href="/">
             <Image
               src="https://github.com/Claudenir-Nojosa/servidor_estaticos/blob/main/3907424.png?raw=true"
-              width={54}
-              height={54}
+              width={30}
+              height={30}
               alt="Logo"
             />
           </NextLink>

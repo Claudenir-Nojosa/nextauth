@@ -8,16 +8,32 @@ import {
 } from "@/components/ui/card";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { title } from "./shared/primitives";
-const PostCard = () => {
+import { title as textTitle } from "./shared/Primitives";
+import { Tag, User } from "@prisma/client";
+import { FC } from "react";
+
+interface PostCardProps {
+  post: {
+    id: string;
+    title: string;
+    content: string;
+    Tag: Tag;
+    User: User;
+  };
+}
+
+const PostCard: FC<PostCardProps> = ({ post }) => {
+  const { title, content, Tag } = post;
   return (
     <Card className="max-w-sm flex flex-col items-center justify-center">
       <CardHeader>
-        <CardTitle className={title({ color: "cyan", size: "sm" })}>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
+        <CardTitle className={textTitle({ color: "cyan", size: "sm" })}>
+          {title}
+        </CardTitle>
+        <CardDescription>{Tag.name}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Card Content</p>
+        <p>{content}</p>
       </CardContent>
       <CardFooter>
         <Button variant="outline">
