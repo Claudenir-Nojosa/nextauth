@@ -29,9 +29,9 @@
     ".next/types/**/*.ts",
     "app/api/auth/[...nextauth]/route.js",
     "components/providers/providers.tsx",
-    "app/page.jsx",
+    "app/page.tsx",
     "components/shared/Navbar.tsx",
     "app/(root)/register/page.tsx"
-  ],
+, "app/api/posts/route.js"  ],
   "exclude": ["node_modules"]
 }

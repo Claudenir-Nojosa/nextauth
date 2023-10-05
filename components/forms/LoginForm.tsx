@@ -55,9 +55,6 @@ const LoginForm = () => {
       });
 
       if (res?.error == null) {
-        toast.success("Usuário logado.", {
-          position: "bottom-right",
-        });
         router.push("/");
       } else {
         toast.error("Aconteceu um erro ao fazer login", {
