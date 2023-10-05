@@ -16,25 +16,28 @@ export interface Posts {
 }
 
 export default function Home() {
-  const { data: dataPosts, isLoading: isLoadingPosts, isError: isErrorPosts } = useQuery({
+  const {
+    data: dataPosts,
+    data: dataSession,
+    isLoading: isLoadingPosts,
+    isError: isErrorPosts,
+  } = useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
       const { data } = await axios.get("/api/posts");
       return data.posts as Posts[];
+      return data.session;
     },
   });
   return (
     <div className="flex flex-col justify-center items-center text-center">
       <h1 className={textTitle({ color: "cyan", size: "lg" })}>Home</h1>
       <h2 className="text-2xl">Rendered by the Server</h2>
-      {JSON.stringify(dataPosts,null,2)}
-      {/*       {session ? (
+      {JSON.stringify(dataPosts, null, 2)}
+      {dataSession ? (
         <div>
-          <pre className="hidden xl:inline-block">
-            {JSON.stringify(session)}
-          </pre>
           <div className="grid xl:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-4 ">
-            {posts.map((post) => (
+            {dataPosts.map((post: Posts) => (
               <PostCard key={post.id} post={post} />
             ))}
           </div>
@@ -48,7 +51,7 @@ export default function Home() {
             para visualizar os dados da conta.
           </p>
         </div>
-      )} */}
+      )}
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import { db } from "@/lib/prismadb";
-import { z } from "zod";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
@@ -26,13 +25,12 @@ export async function GET() {
         userId: session.user.id,
       },
     });
-    return NextResponse.json({posts}, session, { status: 200 });
+    return NextResponse.json({ posts }, {session}, { status: 200 });
   } catch (error) {
-    if (error instanceof z.ZodError)
-      return new Response(error.issues[0].message, { status: 422 });
-    return NextResponse.json(
-      { message: "Could not fetch tags" },
-      { status: 500 }
-    );
+    if (error)
+      return NextResponse.json(
+        { message: "Could not fetch tags" },
+        { status: 500 }
+      );
   }
 }
