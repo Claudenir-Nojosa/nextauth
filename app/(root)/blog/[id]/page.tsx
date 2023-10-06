@@ -26,7 +26,6 @@ async function getPosts(id: string) {
 const BlogDetailPage: FC<BlogDetailPageProps> = async ({ params }) => {
   const post = await getPosts(params.id);
 
-  console.log(post);
   return (
     <>
       <div>
@@ -34,7 +33,7 @@ const BlogDetailPage: FC<BlogDetailPageProps> = async ({ params }) => {
       </div>
       <span>{post?.Tag.name}</span>
       <p className="text-slate-500">{post?.content}</p>
-      <ButtonAction />
+      <ButtonAction id={params.id} />
     </>
   );
 };

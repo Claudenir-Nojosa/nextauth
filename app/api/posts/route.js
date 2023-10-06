@@ -5,7 +5,6 @@ import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
-  console.log(session.user.id);
   if (!session) return new Response("No session found", { status: 401 });
 
   try {

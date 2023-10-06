@@ -24,7 +24,6 @@ export const Navbar = () => {
     router.push("/");
   };
   const { data: dataSession } = useSession();
-  console.log(dataSession);
   return (
     <NextUINavbar
       maxWidth="xl"

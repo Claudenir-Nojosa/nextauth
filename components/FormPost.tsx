@@ -26,7 +26,7 @@ import { FC } from "react";
 import Link from "next/link";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Tag } from "@prisma/client";
+import { Post, Tag } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -47,12 +47,15 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
       return response.data;
     },
   });
-  console.log(dataTags);
-  const createPostMutation = async (newPostData: any) => {
-    const response = await axios.post("/api/posts/create", newPostData);
-    return response.data;
-  };
-  const { mutate: createPost, isLoading } = useMutation(createPostMutation, {
+  const { mutate: createPost, isLoading } = useMutation<
+    Post,
+    unknown,
+    z.infer<typeof FormSchema>
+  >({
+    mutationFn: async (newPostData) => {
+      const response = await axios.post("/api/posts/create", newPostData);
+      return response.data;
+    },
     onSuccess: (data) => {
       // Faça o redirecionamento após a criação bem-sucedida
       toast.success("Post criado com sucesso!");
@@ -63,6 +66,7 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
       toast.error("Aconteceu um erro ao criar o Post, tente novamente");
     },
   });
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
     createPost(data);
     console.log(data);
