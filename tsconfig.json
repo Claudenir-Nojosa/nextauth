@@ -32,6 +32,6 @@
     "app/page.tsx",
     "components/shared/Navbar.tsx",
     "app/(root)/register/page.tsx"
-, "app/api/posts/route.js"  ],
+, "app/api/posts/route.js", "app/api/create/route.js", "app/(root)/blog/[id]/page.tsx"  ],
   "exclude": ["node_modules"]
 }

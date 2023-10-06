@@ -23,7 +23,7 @@ interface PostCardProps {
 }
 
 const PostCard: FC<PostCardProps> = ({ post }) => {
-  const { title, content, Tag } = post;
+  const { title, content, Tag, id } = post;
   return (
     <Card className="max-w-sm flex flex-col items-center justify-center">
       <CardHeader>
@@ -37,7 +37,7 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
       </CardContent>
       <CardFooter>
         <Button variant="outline">
-          <Link href="/blog/1" className="hover:underline">
+          <Link href={`/blog/${id}`} className="hover:underline">
             Ler mais...
           </Link>
         </Button>
