@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,7 +13,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { Skeleton } from "@nextui-org/react";
 import { Input } from "./ui/input";
 import {
   Select,
@@ -25,9 +24,10 @@ import {
 import { FormSchema } from "@/lib/validations/post";
 import { FC } from "react";
 import Link from "next/link";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Tag } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 interface FormPostProps {
@@ -38,7 +38,7 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
-
+  const router = useRouter();
   // fetch list tags
   const { data: dataTags, isLoading: isLoadingTags } = useQuery<Tag[]>({
     queryKey: ["tags"],
@@ -48,8 +48,23 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
     },
   });
   console.log(dataTags);
-
+  const createPostMutation = async (newPostData: any) => {
+    const response = await axios.post("/api/posts/create", newPostData);
+    return response.data;
+  };
+  const { mutate: createPost, isLoading } = useMutation(createPostMutation, {
+    onSuccess: (data) => {
+      // Faça o redirecionamento após a criação bem-sucedida
+      toast.success("Post criado com sucesso!");
+      router.push("/");
+      router.refresh();
+    },
+    onError: (data) => {
+      toast.error("Aconteceu um erro ao criar o Post, tente novamente");
+    },
+  });
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    createPost(data);
     console.log(data);
   }
 
@@ -94,7 +109,7 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
         ) : (
           <FormField
             control={form.control}
-            name="tag"
+            name="tagId"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Ferramenta</FormLabel>
