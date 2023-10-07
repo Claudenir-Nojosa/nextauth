@@ -33,7 +33,7 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
         <CardDescription>{Tag.name}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{content}</p>
+        <p>{content.slice(0, 100)}</p>
       </CardContent>
       <CardFooter>
         <Button variant="outline">

@@ -6,8 +6,8 @@ export const FormSchema = z.object({
     .min(10, {
       message: "Conteúdo tem que ter no mínimo 10 caracteres.",
     })
-    .max(160, {
-      message: "Conteúdo tem que ter no máximo 160 caracteres.",
+    .max(10000, {
+      message: "Conteúdo tem que ter no máximo 10000 caracteres.",
     }),
   title: z
     .string({ required_error: "Insira o título" })
