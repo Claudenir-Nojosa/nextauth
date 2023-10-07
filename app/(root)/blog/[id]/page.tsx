@@ -1,6 +1,15 @@
 import ButtonAction from "@/components/ButtonAction";
 import { db } from "@/lib/prismadb";
 import React, { FC } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 interface BlogDetailPageProps {
   params: {
@@ -27,14 +36,20 @@ const BlogDetailPage: FC<BlogDetailPageProps> = async ({ params }) => {
   const post = await getPosts(params.id);
 
   return (
-    <>
-      <div>
-        <h2 className="text-2xl font-semibold">{post?.title}</h2>
-      </div>
-      <span>{post?.Tag.name}</span>
-      <p className="text-slate-500">{post?.content}</p>
-      <ButtonAction id={params.id} />
-    </>
+    <Card className="max-w-5xl">
+      <CardHeader>
+        <CardTitle>{post?.title}</CardTitle>
+        <CardDescription>{post?.Tag.name}</CardDescription>
+      </CardHeader>
+      <Separator className="bg-white my-4" />
+      <CardContent>
+        <p>{post?.content}</p>
+      </CardContent>
+      <Separator className="bg-white my-4" />
+      <CardFooter>
+        <ButtonAction id={params.id} />
+      </CardFooter>
+    </Card>
   );
 };
 

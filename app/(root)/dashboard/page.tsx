@@ -5,7 +5,6 @@ import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
 
 const Dashboard = () => {
   const session = useSession();
@@ -19,13 +18,16 @@ const Dashboard = () => {
   return (
     <>
       {session.status === "unauthenticated" ? (
-        <div>
-          Por favor,
-          <Link className="underline text-slate-400 px-1" href="/login">
-            faça login
-          </Link>
-          para visualizar o dashboard.
-        </div>
+        <>
+          <h1 className={textTitle({ color: "cyan", size: "lg" })}>Dashboard</h1>
+          <div className="mt-6">
+            Por favor,
+            <Link className="underline text-slate-400 px-1" href="/login">
+              faça login
+            </Link>
+            para visualizar o dashboard.
+          </div>
+        </>
       ) : (
         <div>
           <div className="text-4xl font-bold text-center justify-center flex flex-col items-center gap-3">

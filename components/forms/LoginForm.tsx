@@ -20,6 +20,7 @@ import { LoginSchema } from "@/lib/validations/user";
 import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import { GithubIcon, GoogleIcon } from "@/config/icons";
 import { toast } from "sonner";
+import { title as textTitle } from "../shared/Primitives";
 
 const LoginForm = () => {
   const session = useSession();
@@ -67,7 +68,8 @@ const LoginForm = () => {
   };
   return (
     <>
-      <Card className="max-w-[400px] bg-slate-800 border rounded-lg p-10 pb-2">
+      <h1 className={textTitle({ color: "cyan", size: "lg" })}>Fazer Login</h1>
+      <Card className="max-w-[400px] bg-slate-800 border rounded-lg p-10 pb-2 mt-6">
         <Form {...form}>
           <CardBody>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

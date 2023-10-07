@@ -30,7 +30,7 @@ export default function Home() {
     },
   });
 
-  if (isLoadingPosts) {
+  if (isLoadingPosts && dataSession) {
     return <Loading />;
   }
   return (
@@ -46,8 +46,8 @@ export default function Home() {
         </div>
       ) : (
         <div>
-          <p>
-            <Link className="underline text-slate-400" href="/login">
+          <p className="mt-6">
+            <Link className="underline text-slate-400 mx-2" href="/login">
               Faça login
             </Link>
             para visualizar os dados da conta.

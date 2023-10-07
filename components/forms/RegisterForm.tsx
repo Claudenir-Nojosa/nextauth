@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import { RegisterSchema } from "@/lib/validations/user";
 import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import { GithubIcon, GoogleIcon } from "@/config/icons";
-
+import { title as textTitle } from "../shared/Primitives";
 const RegisterForm = () => {
   const router = useRouter();
 
@@ -60,7 +60,8 @@ const RegisterForm = () => {
 
   return (
     <>
-      <Card className="max-w-[400px] bg-slate-800 border rounded-lg p-10 pb-2">
+      <h1 className={textTitle({ color: "cyan", size: "lg" })}>Criar conta</h1>
+      <Card className="max-w-[400px] bg-slate-800 border rounded-lg p-10 pb-2 mt-6">
         <Form {...form}>
           <CardBody>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -142,7 +143,7 @@ const RegisterForm = () => {
                 </Button>
               </div>
               <p className="text-center text-sm text-slate-300 mt-10">
-                Se você já possui uma conta
+                Você já possui uma conta?
                 <Link
                   className="text-blue-500 hover:underline ml-2"
                   href="/login"

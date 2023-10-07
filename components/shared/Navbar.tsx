@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { GithubIcon } from "@/config/icons";
 import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -41,7 +42,7 @@ export const Navbar = () => {
             />
           </NextLink>
         </NavbarBrand>
-        <ul className="hidden sm:flex gap-4  lg:pl-0 justify-start ml-2">
+        <ul className="hidden sm:flex gap-3  lg:pl-0 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -65,14 +66,24 @@ export const Navbar = () => {
             <GithubIcon className="text-default-500 hover:text-slate-200" />
           </Link>
           {dataSession?.user ? (
-            <Button
-              className="text-default-500"
-              variant="ghost"
-              size="icon"
-              onClick={handleSignOut}
-            >
-              <LogOut className="hover:text-slate-200" />
-            </Button>
+            <>
+              <Button
+                className="text-default-500"
+                variant="ghost"
+                size="icon"
+                onClick={handleSignOut}
+              >
+                <LogOut className="hover:text-slate-200" />
+              </Button>
+              <Avatar>
+                <AvatarImage src={dataSession.user.image} />
+                <AvatarFallback className="relative flex h-10 w-10 text-black shrink-0 overflow-hidden rounded-full bg-white">
+                  {dataSession?.user.name
+                    ? dataSession.user.name.charAt(0).toUpperCase()
+                    : ""}
+                </AvatarFallback>
+              </Avatar>
+            </>
           ) : (
             <Link href="/login">
               <User2 className="text-default-500 hover:text-slate-200" />
@@ -81,19 +92,29 @@ export const Navbar = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent className=" sm:hidden basis-1/5 sm:basis-full justify-end">
-        <NavbarItem className=" gap-2">
+        <NavbarItem className=" gap-2 flex justify-center align-middle">
           <Link isExternal href={siteConfig.links.github} aria-label="Github">
             <GithubIcon className="hidden sm:flex text-default-500 hover:text-slate-200 " />
           </Link>
           {dataSession?.user ? (
-            <Button
-              className="text-default-500"
-              variant="ghost"
-              size="icon"
-              onClick={handleSignOut}
-            >
-              <LogOut className="hover:text-slate-200" />
-            </Button>
+            <div className="flex">
+              <Button
+                className="text-default-500"
+                variant="ghost"
+                size="icon"
+                onClick={handleSignOut}
+              >
+                <LogOut className="hover:text-slate-200" />
+              </Button>
+              <Avatar>
+                <AvatarImage src={dataSession?.user.image} />
+                <AvatarFallback className="relative flex h-10 w-10 text-black bg-white shrink-0 overflow-hidden rounded-full">
+                  {dataSession?.user.name
+                    ? dataSession.user.name.charAt(0).toUpperCase()
+                    : ""}
+                </AvatarFallback>
+              </Avatar>
+            </div>
           ) : (
             <Link href="/login">
               <User2 className="text-default-500 hover:text-slate-200" />

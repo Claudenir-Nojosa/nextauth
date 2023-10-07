@@ -25,7 +25,7 @@ interface PostCardProps {
 const PostCard: FC<PostCardProps> = ({ post }) => {
   const { title, content, Tag, id } = post;
   return (
-    <Card className="max-w-sm flex flex-col items-center justify-center">
+    <Card className="max-w-sm flex flex-col justify-center text-start">
       <CardHeader>
         <CardTitle className={textTitle({ color: "cyan", size: "sm" })}>
           {title}
