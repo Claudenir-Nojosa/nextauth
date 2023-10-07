@@ -18,13 +18,13 @@ export async function GET() {
         User: true,
       },
       orderBy: {
-        createdAt: "desc",
+        updatedAt: "desc",
       },
       where: {
         userId: session.user.id,
       },
     });
-    return NextResponse.json({ posts }, {session}, { status: 200 });
+    return NextResponse.json({ posts }, { session }, { status: 200 });
   } catch (error) {
     if (error)
       return NextResponse.json(

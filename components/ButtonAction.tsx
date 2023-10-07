@@ -7,11 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
-
-export const Icons = {
-  spinner: Loader2,
-};
+import Loading from "./Loading";
 interface ButtonActionProps {
   id: string;
 }
@@ -45,11 +41,7 @@ const ButtonAction: FC<ButtonActionProps> = ({ id }) => {
         className="bg-red-700"
         variant="ghost"
       >
-        {isLoadingDelete ? (
-          <Icons.spinner className="h-4 w-4 animate-spin" />
-        ) : (
-          <Trash />
-        )}
+        {isLoadingDelete ? <Loading /> : <Trash />}
       </Button>
     </div>
   );

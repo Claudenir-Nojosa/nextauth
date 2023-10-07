@@ -30,11 +30,7 @@ import { Post, Tag } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { FormInputPost } from "@/types";
-import { Loader2 } from "lucide-react";
-
-const Icons = {
-  spinner: Loader2,
-};
+import Loading from "./Loading";
 
 interface FormPostProps {
   isEditing: boolean;
@@ -70,7 +66,7 @@ export const FormPost: FC<FormPostProps> = ({
       return response.data;
     },
   });
-  const { mutate: createPost, isLoading } = useMutation<
+  const { mutate: createPost, isLoading: isLoadingCreatePost } = useMutation<
     Post,
     unknown,
     z.infer<typeof FormSchema>
@@ -109,11 +105,7 @@ export const FormPost: FC<FormPostProps> = ({
     },
   });
   if (isLoadingEdit) {
-    return (
-      <div className="text-center">
-        <Icons.spinner className="h-4 w-4 animate-spin" />
-      </div>
-    );
+    return <Loading />;
   }
   function onSubmit(data: z.infer<typeof FormSchema>) {
     {
@@ -207,7 +199,12 @@ export const FormPost: FC<FormPostProps> = ({
             <Link href="/">Cancelar</Link>
           </Button>
           <Button variant="outline" type="submit">
-            {isEditing ? "Atualizar" : "Criar"}
+            {isLoadingCreatePost ? <Loading /> : ""}
+            {isLoadingCreatePost
+              ? "Criando..."
+              : isEditing
+              ? "Atualizar"
+              : "Criar"}
           </Button>
         </div>
       </form>
