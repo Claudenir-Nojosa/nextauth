@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,23 +22,46 @@ import {
   SelectValue,
 } from "./ui/select";
 import { FormSchema } from "@/lib/validations/post";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Link from "next/link";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Post, Tag } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { FormInputPost } from "@/types";
+import { Loader2 } from "lucide-react";
+
+const Icons = {
+  spinner: Loader2,
+};
 
 interface FormPostProps {
   isEditing: boolean;
+  initialValue?: FormInputPost;
+  params: {
+    id: string;
+  };
 }
 
-export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
+export const FormPost: FC<FormPostProps> = ({
+  isEditing,
+  initialValue,
+  params,
+}) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: initialValue,
   });
+  const { id } = params;
   const router = useRouter();
+
+  useEffect(() => {
+    if (initialValue) {
+      // Define os valores iniciais no formulário após a montagem do componente
+      form.reset(initialValue);
+    }
+  }, [initialValue]);
   // fetch list tags
   const { data: dataTags, isLoading: isLoadingTags } = useQuery<Tag[]>({
     queryKey: ["tags"],
@@ -66,12 +89,45 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
       toast.error("Aconteceu um erro ao criar o Post, tente novamente");
     },
   });
-
+  const { mutate: updatePost, isLoading: isLoadingEdit } = useMutation<
+    Post,
+    unknown,
+    z.infer<typeof FormSchema>
+  >({
+    mutationFn: async (newPostData) => {
+      const response = await axios.patch(`/api/posts/${id}`, newPostData);
+      return response.data;
+    },
+    onSuccess: (data) => {
+      // Faça o redirecionamento após a criação bem-sucedida
+      toast.success("Post editado com sucesso!");
+      router.push("/");
+      router.refresh();
+    },
+    onError: (data) => {
+      toast.error("Aconteceu um erro ao editar o Post, tente novamente");
+    },
+  });
+  if (isLoadingEdit) {
+    return (
+      <div className="text-center">
+        <Icons.spinner className="h-4 w-4 animate-spin" />
+      </div>
+    );
+  }
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    createPost(data);
+    {
+      isEditing && updatePost(data);
+    }
+    {
+      !isEditing && createPost(data);
+    }
     console.log(data);
   }
-
+  const defaultValue =
+    initialValue && dataTags
+      ? dataTags.find((tag) => tag.id === initialValue.tagId)?.name || ""
+      : "Selecione";
   return (
     <Form {...form}>
       <form
@@ -108,6 +164,7 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
             </FormItem>
           )}
         />
+
         {isLoadingTags ? (
           <div>Carregando...</div>
         ) : (
@@ -120,10 +177,15 @@ export const FormPost: FC<FormPostProps> = ({ isEditing }) => {
                 <FormControl>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    defaultValue={
+                      initialValue && dataTags
+                        ? dataTags.find((tag) => tag.id === initialValue.tagId)
+                            ?.name || ""
+                        : ""
+                    }
                   >
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione " />
+                      <SelectValue placeholder={`${defaultValue}`} />
                     </SelectTrigger>
 
                     <SelectContent className="bg-black">

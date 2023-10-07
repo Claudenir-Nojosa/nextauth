@@ -26,7 +26,6 @@ export default function Home() {
     queryFn: async () => {
       const { data } = await axios.get("/api/posts");
       return data.posts as Posts[];
-      return data.session;
     },
   });
   return (

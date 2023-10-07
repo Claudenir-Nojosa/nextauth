@@ -7,14 +7,18 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
+export const Icons = {
+  spinner: Loader2,
+};
 interface ButtonActionProps {
   id: string;
 }
 
 const ButtonAction: FC<ButtonActionProps> = ({ id }) => {
   const router = useRouter();
-  const { mutate: deletePost } = useMutation({
+  const { mutate: deletePost, isLoading: isLoadingDelete } = useMutation({
     mutationFn: async () => {
       return axios.delete(`/api/posts/${id}`);
     },
@@ -32,12 +36,20 @@ const ButtonAction: FC<ButtonActionProps> = ({ id }) => {
   return (
     <div className="flex gap-2 justify-center items-center mt-4">
       <Button variant="ghost" className="bg-slate-800">
-        <Link href="/edit/id">
+        <Link href={`/edit/${id}`}>
           <Pencil />
         </Link>
       </Button>
-      <Button className="bg-red-700" variant="ghost">
-        <Trash onClick={() => deletePost()} />
+      <Button
+        onClick={() => deletePost()}
+        className="bg-red-700"
+        variant="ghost"
+      >
+        {isLoadingDelete ? (
+          <Icons.spinner className="h-4 w-4 animate-spin" />
+        ) : (
+          <Trash />
+        )}
       </Button>
     </div>
   );

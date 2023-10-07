@@ -1,6 +1,6 @@
 import { db } from "@/lib/prismadb";
-import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
 interface contextProps {
@@ -47,5 +47,30 @@ export async function PATCH(req: Request, context: contextProps) {
       { message: "Could Not Update Post" },
       { status: 500 }
     );
+  }
+}
+export async function GET(req: Request, context: contextProps) {
+  const session = await getServerSession(authOptions);
+  if (!session) return new Response("No session found", { status: 401 });
+
+  try {
+    const { params } = context;
+    const post = await db.post.findFirst({
+      where: {
+        userId: session.user.id,
+        id: params.postId,
+      },
+      include: {
+        Tag: true,
+        User: true,
+      },
+    });
+    return NextResponse.json(post, { status: 200 });
+  } catch (error) {
+    if (error)
+      return NextResponse.json(
+        { message: "Could not fetch post" },
+        { status: 500 }
+      );
   }
 }
