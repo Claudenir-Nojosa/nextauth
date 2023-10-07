@@ -37,8 +37,8 @@ export default function Home() {
     <div className="flex flex-col justify-center items-center text-center">
       <h1 className={textTitle({ color: "cyan", size: "lg" })}>Home</h1>
       {dataSession ? (
-        <div>
-          <div className="grid xl:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-4 ">
+        <div className="mt-6">
+          <div className="grid xl:grid-cols-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 ">
             {dataPosts.map((post: Posts) => (
               <PostCard key={post.id} post={post} />
             ))}
