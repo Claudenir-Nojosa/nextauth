@@ -78,7 +78,7 @@ export const FormPost: FC<FormPostProps> = ({
     onSuccess: (data) => {
       // Faça o redirecionamento após a criação bem-sucedida
       toast.success("Post criado com sucesso!");
-      router.push("/");
+      router.push("/dashboard");
       router.refresh();
     },
     onError: (data) => {
@@ -97,7 +97,7 @@ export const FormPost: FC<FormPostProps> = ({
     onSuccess: (data) => {
       // Faça o redirecionamento após a criação bem-sucedida
       toast.success("Post editado com sucesso!");
-      router.push("/");
+      router.push("/dashboard");
       router.refresh();
     },
     onError: (data) => {
@@ -124,14 +124,14 @@ export const FormPost: FC<FormPostProps> = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="min-w-1/3 max-w-3xl space-y-6 bg-slate-900  rounded-xl mx-10 p-4 mt-6 border-slate-200 border min-w-[10rem]"
+        className="min-w-[32rem] min-h-[32rem] space-y-10 bg-black  rounded-xl mx-10 p-4 mt-6 border-slate-200 border"
       >
         <FormField
           control={form.control}
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Titulo</FormLabel>
+              <FormLabel className="text-2xl">Titulo</FormLabel>
               <FormControl>
                 <Input placeholder="Insira aqui o título" {...field} />
               </FormControl>
@@ -144,7 +144,7 @@ export const FormPost: FC<FormPostProps> = ({
           name="content"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Conteúdo</FormLabel>
+              <FormLabel className="text-2xl">Conteúdo</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Nos conte o que você tem a dizer."
@@ -165,7 +165,7 @@ export const FormPost: FC<FormPostProps> = ({
             name="tagId"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Ferramenta</FormLabel>
+                <FormLabel className="text-2xl">Ferramenta</FormLabel>
                 <FormControl>
                   <Select
                     onValueChange={field.onChange}
@@ -194,7 +194,7 @@ export const FormPost: FC<FormPostProps> = ({
             )}
           />
         )}
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-4">
           <Button variant="outline" type="submit">
             <Link href="/">Cancelar</Link>
           </Button>

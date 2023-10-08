@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Tag, User } from "@prisma/client";
 import Loading from "@/components/Loading";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 export interface Posts {
   id: string;
@@ -34,26 +35,30 @@ export default function Home() {
     return <Loading />;
   }
   return (
-    <div className="flex flex-col justify-center items-center text-center">
-      <h1 className={textTitle({ color: "cyan", size: "lg" })}>Dashboard</h1>
-      {dataSession ? (
-        <div className="mt-6">
-          <div className="grid xl:grid-cols-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 ">
-            {dataPosts.map((post: Posts) => (
-              <PostCard key={post.id} post={post} />
-            ))}
+    <MaxWidthWrapper>
+      <div className="flex flex-col justify-center items-center text-center">
+        <h1 className={textTitle({ color: "violet", size: "lg" })}>
+          Dashboard
+        </h1>
+        {dataSession ? (
+          <div className="mt-6">
+            <div className="grid xl:grid-cols-3 grid-cols-1 sm:grid-cols-1  lg:grid-cols-2 gap-7 ">
+              {dataPosts.map((post: Posts) => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </div>
           </div>
-        </div>
-      ) : (
-        <div>
-          <p className="mt-6">
-            <Link className="underline text-slate-400 mx-2" href="/login">
-              Faça login
-            </Link>
-            para visualizar os dados da conta.
-          </p>
-        </div>
-      )}
-    </div>
+        ) : (
+          <div>
+            <p className="mt-6">
+              <Link className="underline text-slate-400 mx-2" href="/login">
+                Faça login
+              </Link>
+              para visualizar os dados da conta.
+            </p>
+          </div>
+        )}
+      </div>
+    </MaxWidthWrapper>
   );
 }

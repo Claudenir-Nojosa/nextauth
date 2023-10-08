@@ -11,10 +11,6 @@ import { useRouter } from "next/navigation";
 const Dashboard = () => {
   const session = useSession();
   const router = useRouter();
-  const handleSignOut = () => {
-    signOut();
-    router.push("/");
-  };
 
   const { data: dataSession } = useSession();
   return (
@@ -207,11 +203,11 @@ const Dashboard = () => {
                 />
               )}
               <Button
-                className="mt-10 hover:bg-slate-800"
+                className="mt-10 hover:text-zinc-400"
                 variant="outline"
-                onClick={handleSignOut}
+                onClick={() => router.push("/create")}
               >
-                Sair
+                Começar a criação!
               </Button>
             </div>
           </div>

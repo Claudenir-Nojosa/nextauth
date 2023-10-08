@@ -25,15 +25,15 @@ interface PostCardProps {
 const PostCard: FC<PostCardProps> = ({ post }) => {
   const { title, content, Tag, id } = post;
   return (
-    <Card className="max-w-sm flex flex-col justify-center text-start">
+    <Card className="min-w-[10rem] min-h-[20rem] flex flex-col justify-center text-start">
       <CardHeader>
-        <CardTitle className={textTitle({ color: "cyan", size: "sm" })}>
+        <CardTitle className={textTitle({ color: "violet", size: "md" })}>
           {title}
         </CardTitle>
-        <CardDescription>{Tag.name}</CardDescription>
+        <CardDescription className="text-zinc-400">{Tag.name}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <p>{content.slice(0, 100)}</p>
+      <CardContent className="max-w-fit">
+        {content.length > 20 ? <p>{content.slice(0, 20)}...</p> : <p>{content}</p>}
       </CardContent>
       <CardFooter>
         <Button variant="outline">
