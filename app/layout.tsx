@@ -11,7 +11,7 @@ import { fontSans } from "@/config/fonts";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 
 export const metadata: Metadata = {
-  title: "Boilerplate",
+  title: ".nextEvery",
   description: "A full Nextjs application using NextAuth",
   icons: {
     icon: "/favicon.ico",
