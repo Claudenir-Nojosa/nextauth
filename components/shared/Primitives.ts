@@ -13,7 +13,7 @@ export const title = tv({
 			foreground: "dark:from-[#FFFFFF] dark:to-[#4B4B4B]",
 		},
 		size: {
-			sm: "text-xl lg:text-[50px]",
+			sm: "lg:text-[50px]",
 			md: "text-[2rem] lg:text-3xl leading-9",
 			lg: "text-7xl lg:text-7xl",
 		},

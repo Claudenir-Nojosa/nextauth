@@ -203,7 +203,7 @@ const Dashboard = () => {
                 />
               )}
               <Button
-                className="mt-10 hover:text-zinc-400"
+                className="mt-10 hover:text-zinc-400 rounded-2xl border border-purple-800"
                 variant="outline"
                 onClick={() => router.push("/create")}
               >

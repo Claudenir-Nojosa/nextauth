@@ -50,7 +50,7 @@ const BlogDetailPage: FC<BlogDetailPageProps> = async ({ params }) => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Textarea className="resize-none min-h-[18rem] text-zinc-300">{post?.content}</Textarea>
+          <Textarea className="resize-none min-h-[18rem] border-none text-zinc-300">{post?.content}</Textarea>
         </CardContent>
         <CardFooter>
           <ButtonAction id={params.id} />
