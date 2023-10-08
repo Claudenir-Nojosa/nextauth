@@ -8,6 +8,7 @@ import {
 import { Navbar } from "@/components/shared/Navbar";
 import { Toaster } from "sonner";
 import { fontSans } from "@/config/fonts";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 export const metadata: Metadata = {
   title: "Boilerplate",
@@ -34,7 +35,7 @@ export default function RootLayout({
               <div className="flex flex-col min-h-screen">
                 <Navbar />
                 <main className="flex-1 mt-7 flex flex-col items-center justify-center">
-                  {children}
+                  <EdgeStoreProvider>{children}</EdgeStoreProvider>
                 </main>
               </div>
             </AuthProvider>
