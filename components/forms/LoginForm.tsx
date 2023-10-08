@@ -68,7 +68,7 @@ const LoginForm = () => {
   };
   return (
     <>
-      <h1 className={`text-xs ${textTitle({ color: "violet" })}`}>
+      <h1 className={`text-2xl ${textTitle({ color: "violet" })}`}>
         Fazer Login
       </h1>
       <Card className="min-w-[400px] max-h-[800px] bg-black border rounded-lg p-2 pb-2 mt-6">

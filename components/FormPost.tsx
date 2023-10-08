@@ -176,11 +176,11 @@ export const FormPost: FC<FormPostProps> = ({
                         : ""
                     }
                   >
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className="w-full text-zinc-400">
                       <SelectValue placeholder={`${defaultValue}`} />
                     </SelectTrigger>
 
-                    <SelectContent className="bg-black">
+                    <SelectContent className="bg-black text-zinc-300">
                       {dataTags?.map((item) => (
                         <SelectItem key={item.id} value={item.id}>
                           {item.name}
@@ -195,10 +195,18 @@ export const FormPost: FC<FormPostProps> = ({
           />
         )}
         <div className="flex justify-end gap-4">
-          <Button variant="outline" type="submit">
+          <Button
+            variant="outline"
+            type="submit"
+            className="hover:text-zinc-400"
+          >
             <Link href="/">Cancelar</Link>
           </Button>
-          <Button variant="outline" type="submit">
+          <Button
+            variant="outline"
+            type="submit"
+            className="hover:text-zinc-400"
+          >
             {isLoadingCreatePost ? <Loading /> : ""}
             {isLoadingCreatePost
               ? "Criando..."

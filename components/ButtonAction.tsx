@@ -22,7 +22,7 @@ const ButtonAction: FC<ButtonActionProps> = ({ id }) => {
     onSuccess: (data) => {
       // Faça o redirecionamento após a criação bem-sucedida
       toast.success("Post deletado com sucesso!");
-      router.push("/");
+      router.push("/dashboard");
       router.refresh();
     },
     onError: (data) => {

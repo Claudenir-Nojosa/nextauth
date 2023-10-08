@@ -11,6 +11,7 @@ import Link from "next/link";
 import { title as textTitle } from "./shared/Primitives";
 import { Tag, User } from "@prisma/client";
 import { FC } from "react";
+import { Textarea } from "./ui/textarea";
 
 interface PostCardProps {
   post: {
@@ -32,9 +33,14 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
         </CardTitle>
         <CardDescription className="text-zinc-400">{Tag.name}</CardDescription>
       </CardHeader>
-      <CardContent className="max-w-fit">
-        {content.length > 20 ? <p>{content.slice(0, 20)}...</p> : <p>{content}</p>}
+      <CardContent className="pb-0">
+        <Textarea className="resize-none border-none text-zinc-300">
+          {content.length > 30
+            ? `${content.slice(0, 30)}...`
+            : `${content.slice(0, 30)}`}
+        </Textarea>
       </CardContent>
+
       <CardFooter>
         <Button variant="outline">
           <Link href={`/blog/${id}`} className="hover:underline">

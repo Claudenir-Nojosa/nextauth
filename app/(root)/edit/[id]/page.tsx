@@ -25,7 +25,7 @@ const EditPostPage: FC<EditPostPageProps> = ({ params }) => {
 
   return (
     <>
-      <h1 className={textTitle({ color: "cyan" })}>Editar Post</h1>
+      <h1 className={textTitle({ color: "violet" })}>Editar Post</h1>
       <FormPost isEditing={true} initialValue={dataPost} params={params} />
     </>
   );

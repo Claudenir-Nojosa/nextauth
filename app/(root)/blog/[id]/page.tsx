@@ -10,6 +10,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import { title } from "@/components/shared/Primitives";
+import { Textarea } from "@/components/ui/textarea";
 
 interface BlogDetailPageProps {
   params: {
@@ -36,20 +39,24 @@ const BlogDetailPage: FC<BlogDetailPageProps> = async ({ params }) => {
   const post = await getPosts(params.id);
 
   return (
-    <Card className="max-w-5xl">
-      <CardHeader>
-        <CardTitle>{post?.title}</CardTitle>
-        <CardDescription>{post?.Tag.name}</CardDescription>
-      </CardHeader>
-      <Separator className="bg-white my-4" />
-      <CardContent>
-        <p>{post?.content}</p>
-      </CardContent>
-      <Separator className="bg-white my-4" />
-      <CardFooter>
-        <ButtonAction id={params.id} />
-      </CardFooter>
-    </Card>
+    <MaxWidthWrapper>
+      <Card className="min-w-full">
+        <CardHeader>
+          <CardTitle className={title({ color: "violet" })}>
+            {post?.title}
+          </CardTitle>
+          <CardDescription className="text-zinc-400">
+            {post?.Tag.name}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Textarea className="resize-none min-h-[18rem] text-zinc-300">{post?.content}</Textarea>
+        </CardContent>
+        <CardFooter>
+          <ButtonAction id={params.id} />
+        </CardFooter>
+      </Card>
+    </MaxWidthWrapper>
   );
 };
 
