@@ -40,7 +40,7 @@ export const Navbar = () => {
               {siteConfig.navItems.map((item) => (
                 <NavbarItem key={item.href}>
                   <NextLink
-                    className="text-xl"
+                    className="text-xl hover:text-zinc-300"
                     color="foreground"
                     href={item.href}
                   >

@@ -60,8 +60,10 @@ const RegisterForm = () => {
 
   return (
     <>
-      <h1 className={textTitle({ color: "cyan", size: "lg" })}>Criar conta</h1>
-      <Card className="max-w-[400px] bg-slate-800 border rounded-lg p-10 pb-2 mt-6">
+      <h1 className={`text-xs ${textTitle({ color: "violet" })}`}>
+        Criar conta
+      </h1>
+      <Card className="min-w-[400px] max-h-[800px] bg-black border rounded-lg p-10 pb-2 mt-6">
         <Form {...form}>
           <CardBody>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -110,7 +112,7 @@ const RegisterForm = () => {
               />
               <div className="flex justify-center items-center">
                 <Button
-                  className="hover:bg-slate-800"
+                  className="hover:text-zinc-400 w-full mt-5"
                   variant="outline"
                   type="submit"
                 >
@@ -119,14 +121,14 @@ const RegisterForm = () => {
               </div>
             </form>
           </CardBody>
-          <CardFooter>
-            <div className="flex flex-col justify-center items-center">
+          <CardFooter className="flex justify-center items-center">
+            <div>
               <div className="mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400">
                 ou
               </div>
               <div className="gap-3 flex flex-col justify-center items-center">
                 <Button
-                  className="hover:bg-slate-800"
+                  className="hover:text-zinc-400 w-full"
                   variant="outline"
                   onClick={() => signIn("github")}
                 >
@@ -134,7 +136,7 @@ const RegisterForm = () => {
                   Login com Github
                 </Button>
                 <Button
-                  className="hover:bg-slate-800"
+                  className="hover:text-zinc-400 w-full"
                   variant="outline"
                   onClick={() => signIn("google")}
                 >
@@ -145,7 +147,7 @@ const RegisterForm = () => {
               <p className="text-center text-sm text-slate-300 mt-10">
                 Você já possui uma conta?
                 <Link
-                  className="text-blue-500 hover:underline ml-2"
+                  className="text-violet-400 hover:underline ml-2"
                   href="/login"
                 >
                   Login

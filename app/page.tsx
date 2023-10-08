@@ -20,13 +20,13 @@ const Dashboard = () => {
   return (
     <>
       <MaxWidthWrapper className="mb-12 mt-20 sm:mt-15 flex flex-col items-center justify-center text-center">
-        <div className="mx-auto mb-4 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full border border-gray-200 bg-white px-7 py-2 shadow-md backdrop-blur transition-all hover:border-gray-300 hover:bg-white/80">
-          <p className="text-sm font-semibold text-gray-700">
-            .nextEvery agora em produção!
-          </p>
-        </div>
         {session.status === "unauthenticated" ? (
           <>
+            <div className="mx-auto mb-4 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full border border-gray-200 bg-white px-7 py-2 shadow-md backdrop-blur transition-all hover:border-gray-300 hover:bg-white/80">
+              <p className="text-sm font-semibold text-gray-700">
+                .nextEvery agora em produção!
+              </p>
+            </div>
             <h1
               className={`max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl ${textTitle(
                 { size: "lg" }
@@ -175,12 +175,23 @@ const Dashboard = () => {
                   </div>
                 </li>
               </ol>
+              <Link
+                className={`bg-gradient-to-r from-purple-800 via-purple-600 to-purple-800 ${buttonVariants(
+                  {
+                    size: "lg",
+                    className: "mt-5",
+                  }
+                )}`}
+                href="/login"
+              >
+                Comece agora <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
             </div>
           </>
         ) : (
           <div>
             <div className="text-4xl font-bold text-center justify-center flex flex-col items-center gap-3">
-              <p className={textTitle({ color: "cyan", size: "lg" })}>
+              <p className={textTitle({ color: "violet", size: "lg" })}>
                 Seja bem vindo!
               </p>
               <pre>{dataSession?.user?.name}</pre>

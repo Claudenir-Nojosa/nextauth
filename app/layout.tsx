@@ -14,9 +14,9 @@ export const metadata: Metadata = {
   title: ".nextEvery",
   description: "A full Nextjs application using NextAuth",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "https://raw.githubusercontent.com/Claudenir-Nojosa/servidor_estaticos/main/favicon.ico",
+    shortcut: "https://raw.githubusercontent.com/Claudenir-Nojosa/servidor_estaticos/main/favicon.ico",
+    apple: "https://raw.githubusercontent.com/Claudenir-Nojosa/servidor_estaticos/main/favicon.ico",
   },
 };
 
@@ -34,7 +34,7 @@ export default function RootLayout({
             <AuthProvider>
               <div className="flex flex-col min-h-screen">
                 <Navbar />
-                <main className="flex-1 mt-7 flex flex-col items-center justify-center">
+                <main className="flex-1 flex flex-col items-center justify-center">
                   <EdgeStoreProvider>{children}</EdgeStoreProvider>
                 </main>
               </div>
