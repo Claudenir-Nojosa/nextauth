@@ -1,63 +1,59 @@
 "use client";
-import { title as textTitle } from "@/components/shared/Primitives";
-import { Button } from "@/components/ui/button";
-import { useSession, signOut } from "next-auth/react";
-import Image from "next/image";
+
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import PostCard from "@/components/PostCard";
+import { title as textTitle } from "@/components/shared/Primitives";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { Tag, User } from "@prisma/client";
+import Loading from "@/components/Loading";
 
-const Dashboard = () => {
-  const session = useSession();
-  const router = useRouter();
-  const handleSignOut = () => {
-    signOut();
-    router.push("/");
-  };
+export interface Posts {
+  id: string;
+  title: string;
+  content: string;
+  userId: string;
+  Tag: Tag;
+  User: User;
+}
 
-  const { data: dataSession } = useSession();
+export default function Home() {
+  const {
+    data: dataPosts,
+    data: dataSession,
+    isLoading: isLoadingPosts,
+  } = useQuery({
+    queryKey: ["posts"],
+    queryFn: async () => {
+      const { data } = await axios.get("/api/posts");
+      return data.posts as Posts[];
+    },
+  });
+
+  if (isLoadingPosts && dataSession) {
+    return <Loading />;
+  }
   return (
-    <>
-      {session.status === "unauthenticated" ? (
-        <>
-          <h1 className={textTitle({ color: "cyan", size: "lg" })}>Dashboard</h1>
-          <div className="mt-6">
-            Por favor,
-            <Link className="underline text-slate-400 px-1" href="/login">
-              faça login
-            </Link>
-            para visualizar o dashboard.
-          </div>
-        </>
-      ) : (
-        <div>
-          <div className="text-4xl font-bold text-center justify-center flex flex-col items-center gap-3">
-            <p className={textTitle({ color: "cyan", size: "lg" })}>
-              Seja bem vindo!
-            </p>
-            <pre>{dataSession?.user?.name}</pre>
-            {dataSession?.user?.image === null ? (
-              ""
-            ) : (
-              <Image
-                className="rounded-full"
-                src={dataSession?.user?.image || ""}
-                height={100}
-                width={100}
-                alt={`${dataSession?.user?.name} profile pic`}
-              />
-            )}
-            <Button
-              className="mt-10 hover:bg-slate-800"
-              variant="outline"
-              onClick={handleSignOut}
-            >
-              Sair
-            </Button>
+    <div className="flex flex-col justify-center items-center text-center">
+      <h1 className={textTitle({ color: "cyan", size: "lg" })}>Dashboard</h1>
+      {dataSession ? (
+        <div className="mt-6">
+          <div className="grid xl:grid-cols-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 ">
+            {dataPosts.map((post: Posts) => (
+              <PostCard key={post.id} post={post} />
+            ))}
           </div>
         </div>
+      ) : (
+        <div>
+          <p className="mt-6">
+            <Link className="underline text-slate-400 mx-2" href="/login">
+              Faça login
+            </Link>
+            para visualizar os dados da conta.
+          </p>
+        </div>
       )}
-    </>
+    </div>
   );
-};
-
-export default Dashboard;
+}
