@@ -3,13 +3,8 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
-interface contextProps {
-  params: {
-    postId: string;
-  };
-}
 
-export async function DELETE(req: Request, context: contextProps) {
+export async function DELETE(req, context) {
   try {
     const { params } = context;
     await db.post.delete({
@@ -26,7 +21,7 @@ export async function DELETE(req: Request, context: contextProps) {
     );
   }
 }
-export async function PATCH(req: Request, context: contextProps) {
+export async function PATCH(req, context) {
   try {
     const { params } = context;
     const body = await req.json();
@@ -49,7 +44,7 @@ export async function PATCH(req: Request, context: contextProps) {
     );
   }
 }
-export async function GET(req: Request, context: contextProps) {
+export async function GET(req, context) {
   const session = await getServerSession(authOptions);
   if (!session) return new Response("No session found", { status: 401 });
 
