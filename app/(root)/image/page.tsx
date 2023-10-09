@@ -4,11 +4,8 @@ import { useState } from "react";
 import { useEdgeStore } from "@/lib/edgestore";
 import Link from "next/link";
 import { SingleImageDropzone } from "@/components/SingleImageDropzone";
-import { useSession } from "next-auth/react";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export default async function Page() {
+export default function Page() {
   const [file, setFile] = useState<File>();
   const { edgestore } = useEdgeStore();
   const [progress, setProgress] = useState(0);
