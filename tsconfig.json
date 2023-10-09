@@ -30,7 +30,7 @@
     "app/api/auth/[...nextauth]/route.js",
     "components/providers/providers.tsx",
     "app/page.tsx",
-    "components/shared/Navbar.tsx",
+    "components/shared/Navbar.jsx",
     "app/(root)/register/page.tsx",
     "app/api/posts/route.js",
     "app/api/create/route.js",
