@@ -36,9 +36,9 @@ const Dashboard = () => {
             </h1>
             <p className="mt-5 max-w-prose text-zinc-500 sm:text-lg">
               NextEvery utiliza as últimas tecnologias para proporcionar uma
-              experiência agradável. Sendo algumas delas, 'nextAuth, Tailwind,
+              experiência agradável. Sendo algumas delas, &apos;'nextAuth, Tailwind,
               shadcnUI, NextUI, Sooner, Prisma, MongoDB, Zod, React Hook Form e
-              TanStack Query'.
+              TanStack Query'&apos;.
             </p>
             <Link
               className={`bg-gradient-to-r from-purple-800 via-purple-600 to-purple-800 ${buttonVariants(

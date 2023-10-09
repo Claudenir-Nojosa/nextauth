@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const session = useSession();
   const router = useRouter();
 
@@ -20,4 +20,4 @@ const page = () => {
   return <LoginForm />;
 };
 
-export default page;
+export default Page;
