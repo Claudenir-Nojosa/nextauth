@@ -37,6 +37,6 @@
     "app/(root)/blog/[id]/page.tsx",
     "app/api/posts/create/route.js",
     "app/api/posts/[postId]/route.ts"
-  ],
+, "app/api/tags/route.js"  ],
   "exclude": ["node_modules"]
 }

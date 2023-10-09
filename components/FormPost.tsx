@@ -31,6 +31,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { FormInputPost } from "@/types";
 import Loading from "./Loading";
+import { TagProps } from "./FormTag";
 
 interface FormPostProps {
   isEditing: boolean;
@@ -59,11 +60,11 @@ export const FormPost: FC<FormPostProps> = ({
     }
   }, [initialValue]);
   // fetch list tags
-  const { data: dataTags, isLoading: isLoadingTags } = useQuery<Tag[]>({
+  const { data: dataTags, isLoading: isLoadingTags } = useQuery<TagProps[]>({
     queryKey: ["tags"],
     queryFn: async () => {
       const response = await axios.get("/api/tags");
-      return response.data;
+      return response.data as Tag[];
     },
   });
   const { mutate: createPost, isLoading: isLoadingCreatePost } = useMutation<
@@ -156,7 +157,6 @@ export const FormPost: FC<FormPostProps> = ({
             </FormItem>
           )}
         />
-
         {isLoadingTags ? (
           <div>Carregando...</div>
         ) : (
@@ -167,27 +167,32 @@ export const FormPost: FC<FormPostProps> = ({
               <FormItem>
                 <FormLabel className="text-2xl">Ferramenta</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={
-                      initialValue && dataTags
-                        ? dataTags.find((tag) => tag.id === initialValue.tagId)
-                            ?.name || ""
-                        : ""
-                    }
-                  >
-                    <SelectTrigger className="w-full text-zinc-400">
-                      <SelectValue placeholder={`${defaultValue}`} />
-                    </SelectTrigger>
+                  {dataTags?.length === 0 ? (
+                    <div>Sem Tags ainda</div>
+                  ) : (
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={
+                        initialValue && dataTags
+                          ? dataTags.find(
+                              (tag) => tag.id === initialValue.tagId
+                            )?.name || ""
+                          : ""
+                      }
+                    >
+                      <SelectTrigger className="w-full text-zinc-400">
+                        <SelectValue placeholder={`${defaultValue}`} />
+                      </SelectTrigger>
 
-                    <SelectContent className="bg-black text-zinc-300">
-                      {dataTags?.map((item) => (
-                        <SelectItem key={item.id} value={item.id}>
-                          {item.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                      <SelectContent className="bg-black text-zinc-300">
+                        {dataTags?.map((item) => (
+                          <SelectItem key={item.id} value={item.id}>
+                            {item.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
                 </FormControl>
                 <FormMessage />
               </FormItem>
