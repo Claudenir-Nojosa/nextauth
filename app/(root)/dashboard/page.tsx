@@ -19,6 +19,7 @@ export interface Posts {
 }
 
 export default function Home() {
+  if (process.env.node_env !== "production") console.log(axios);
   const {
     data: dataPosts,
     data: dataSession,

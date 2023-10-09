@@ -22,7 +22,7 @@ import { GithubIcon, GoogleIcon } from "@/config/icons";
 import { title as textTitle } from "../shared/Primitives";
 const RegisterForm = () => {
   const router = useRouter();
-
+  if (process.env.node_env !== "production") console.log(axios);
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {

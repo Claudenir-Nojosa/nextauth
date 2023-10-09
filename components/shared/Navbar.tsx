@@ -56,7 +56,7 @@ export const Navbar = () => {
           )}
         </NavbarContent>
 
-        <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full justify-end">
+        <div className="sm:flex basis-1/5 sm:basis-full flex justify-end">
           <NavbarItem className="hidden sm:flex gap-4">
             <Link isExternal href={siteConfig.links.github} aria-label="Github">
               <GithubIcon className="text-default-500 hover:text-slate-200" />
@@ -86,9 +86,10 @@ export const Navbar = () => {
               </Link>
             )}
           </NavbarItem>
-        </NavbarContent>
-        <NavbarContent className=" sm:hidden basis-1/5 sm:basis-full justify-end">
-          <NavbarItem className=" gap-2 hidden justify-center align-middle">
+        </div>
+        <div>
+        <NavbarContent className=" sm:hidden basis-1/5 sm:basis-full flex justify-end">
+          <NavbarItem className=" gap-2 hidden justify-end align-middle">
             <Link isExternal href={siteConfig.links.github} aria-label="Github">
               <GithubIcon className="hidden  text-default-500 hover:text-slate-200 " />
             </Link>
@@ -119,6 +120,7 @@ export const Navbar = () => {
           </NavbarItem>
           <Dropdown />
         </NavbarContent>
+        </div>
       </NextUINavbar>
     </MaxWidthWrapper>
   );
